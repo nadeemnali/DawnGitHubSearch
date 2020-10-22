@@ -42,7 +42,7 @@ class BaseRouter : URLRequestConvertible, APIConfiguration
     var parameters: APIParams {
         fatalError("[\(Mirror(reflecting: self).description) - \(#function))] Must be overridden in subclass")
     }
-    
+   
     var baseURLString: String {
         return EnviromentManager.shared.BaseURL
     }
@@ -59,6 +59,7 @@ class BaseRouter : URLRequestConvertible, APIConfiguration
     func asURLRequest() throws -> URLRequest {
         
         let url = URL(string: baseURLString)!
+        
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         
@@ -73,9 +74,11 @@ class BaseRouter : URLRequestConvertible, APIConfiguration
 //        print("Parameters :")
 //        print(parameters as Any)
 //        print("----------------------------------------------------------------------------")
+        
         if encoding != nil
         {
-            return try encoding!.encode(urlRequest, with: parameters)
+            let urlRequest = try encoding!.encode(urlRequest, with: parameters)
+            return urlRequest
         }
         else
         {

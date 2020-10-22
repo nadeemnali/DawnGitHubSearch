@@ -17,4 +17,4 @@ let kDateFormat = "dd-MM-yyyy"
 let kIsProduction = true
 //let kIsProduction = false
 
-let kAPIBaseURL  = "https://api.github.com/search/"
+let kAPIBaseURL  = "https://api.github.com"

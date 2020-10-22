@@ -73,6 +73,15 @@ class BaseNetworkManager : NSObject
 //            print("----- STRING Response ", response.result.value as Any)
 
             })
+        .responseData(completionHandler: { (response) in
+            switch response.result
+            {
+            case .success(_ ):
+                return  onSuccess(response.data)
+            case .failure(_):
+                return onFailure(APIError.init())
+            }
+            })
         .responseJSON { (response) in
             sessionManager.session.invalidateAndCancel()
             if showLoading{
@@ -95,7 +104,7 @@ class BaseNetworkManager : NSObject
 //                    }
                 print("----- Success Response ", response.result.value as Any)
 
-                return onSuccess(response.result.value!)
+                return onSuccess(response.result.value)
             case .failure(_):
                 print("----- Failure Response ", response.result.value as Any)
 
