@@ -33,7 +33,7 @@ struct Item: Codable {
     let itemPrivate: Bool
     let owner: Owner
     let htmlURL: String
-    let itemDescription: String
+    let itemDescription: String?
     let fork: Bool
     let url: String
     let forksURL: String
@@ -55,7 +55,7 @@ struct Item: Codable {
     let issuesURL, pullsURL, milestonesURL, notificationsURL: String
     let labelsURL, releasesURL: String
     let deploymentsURL: String
-    let createdAt, updatedAt, pushedAt: String
+    let createdAt, updatedAt, pushedAt: String?
     let gitURL, sshURL: String
     let cloneURL: String
     let svnURL: String
