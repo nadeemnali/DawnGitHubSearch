@@ -12,9 +12,9 @@ import SDWebImage
 
 class GitHubSearchViewController: BaseViewController {
     
-       private let gitHubSearchManager = SearchGitHubManager()
-  
-   @IBOutlet var tableView : UITableView!
+    private let gitHubSearchManager = SearchGitHubManager()
+    
+    @IBOutlet var tableView : UITableView!
     var objGitHubResults : GitHubSearchModel!
     
     static func instantiateFromStoryboard() -> GitHubSearchViewController {
@@ -24,34 +24,43 @@ class GitHubSearchViewController: BaseViewController {
     
     override func viewDidLoad() {
         self.navigationItem.title = "Repository library" 
-      //  self.searchGitHub(name: "star")
+        //  self.searchGitHub(name: "star")
+        configureUI()
     }
-    
+    func configureUI()
+    {
+        tableView.register(UINib.init(nibName:GitHubSearchCell.cellIdentifier , bundle: nil), forCellReuseIdentifier: GitHubSearchCell.cellIdentifier)
+        tableView.layer.cornerRadius = 2.0
+        tableView.layer.borderColor = UIColor.lightGray.cgColor
+        tableView.layer.borderWidth = 0.5
+        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
     func searchGitHub(name : String)
     {
         gitHubSearchManager.searchGitHub(with: name,
-                   onSuccess:
-                   { (result) in
-                 
-                 // print (accessInfo)
-                     //  self.profileObj = accessInfo
-                      // self.bindUI()
-                    self.objGitHubResults = result
-                    self.updateTableView()
-                       
-               
-               }) { (apiError) in
-                   self.hideLoading()
-                  
-                 //  self.showError()
-               }
+                                         onSuccess:
+            { (result) in
+                
+                self.objGitHubResults = result
+                self.updateTableView()
+                
+                
+        }) { (apiError) in
+            self.hideLoading()
+        }
     }
     
     func updateTableView()
     {
         self.tableView.reloadData()
     }
-
+    
+    func hanldeSelectionForIndex(index: Int) {
+        let detailsViewController = GitHubDetailViewController.instantiateFromStoryboard()
+        detailsViewController.objItem = self.objGitHubResults.items[index]
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }
 extension GitHubSearchViewController : UISearchBarDelegate
 {
@@ -66,19 +75,31 @@ extension GitHubSearchViewController : UISearchBarDelegate
 extension GitHubSearchViewController : UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return  self.objGitHubResults == nil ? 0 :  self.objGitHubResults.items.count
-       }
+        return  self.objGitHubResults == nil ? 0 :  self.objGitHubResults.items.count
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-        let objItem : Item = self.objGitHubResults.items[indexPath.row]
-        cell?.textLabel?.text = objItem.fullName
-        cell?.detailTextLabel?.text = objItem.itemDescription
-        cell?.imageView?.sd_setImage(with:URL(string: objItem.owner.avatarURL), completed: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: GitHubSearchCell.cellIdentifier, for:     indexPath) as! GitHubSearchCell
         
-        return cell!
+        let objItem : Item = self.objGitHubResults.items[indexPath.row]
+        cell.lblTitle.text = objItem.fullName
+        cell.lblDetailinfo.text = objItem.itemDescription
+        cell.gitImageView.sd_setImage(with:URL(string: objItem.owner.avatarURL), completed: nil)
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return  self.objGitHubResults == nil ? "Searching..." :  String(self.objGitHubResults.totalCount) + " results"
     }
     
-   
     
+    
+}
+extension GitHubSearchViewController : UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hanldeSelectionForIndex(index: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
 }
