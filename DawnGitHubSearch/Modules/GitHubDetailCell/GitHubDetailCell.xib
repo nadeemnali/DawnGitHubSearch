@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GitHubDetailCell" id="oSH-eU-BQJ" customClass="GitHubDetailCell" customModule="DawnGitHubSearch" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oSH-eU-BQJ" id="upX-dM-D6C">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRM-RW-Jpd">
+                        <rect key="frame" x="20" y="12" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqF-jD-Ik6">
+                        <rect key="frame" x="354" y="12" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rqF-jD-Ik6" firstAttribute="top" secondItem="upX-dM-D6C" secondAttribute="top" constant="12" id="Elb-Wz-r6o"/>
+                    <constraint firstItem="DRM-RW-Jpd" firstAttribute="top" secondItem="upX-dM-D6C" secondAttribute="top" constant="12" id="VKd-k9-cMW"/>
+                    <constraint firstAttribute="trailing" secondItem="rqF-jD-Ik6" secondAttribute="trailing" constant="18" id="YTT-Yx-PAz"/>
+                    <constraint firstItem="DRM-RW-Jpd" firstAttribute="leading" secondItem="upX-dM-D6C" secondAttribute="leading" constant="20" id="qQE-jE-DnM"/>
+                    <constraint firstAttribute="bottom" secondItem="DRM-RW-Jpd" secondAttribute="bottom" constant="11" id="vDi-jQ-M16"/>
+                    <constraint firstAttribute="bottom" secondItem="rqF-jD-Ik6" secondAttribute="bottom" constant="11" id="xwe-sx-kp2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="lblDetailinfo" destination="rqF-jD-Ik6" id="pwa-56-C3i"/>
+                <outlet property="lblTitle" destination="DRM-RW-Jpd" id="2m2-9i-21d"/>
+            </connections>
+            <point key="canvasLocation" x="121.73913043478262" y="124.55357142857142"/>
+        </tableViewCell>
+    </objects>
+</document>
